@@ -3,89 +3,58 @@
 import { motion } from "framer-motion";
 import {
   Building2,
-  Cpu,
-  Users,
-  Target,
+  Globe,
+  Eye,
+  PhoneCall,
   UserCheck,
   ShieldCheck,
-  Award,
+  TrendingUp,
   ArrowRight,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-const JOURNEY_PIPELINE = [
-  "YOUR BUSINESS",
-  "DIGITAL SYSTEM",
-  "DISCOVERY",
-  "LEADS",
-  "CUSTOMERS",
-  "VERIFIED REVENUE",
-  "OREAGLE EARNS",
-];
-
-const STEPS = [
+const CORE_SYSTEM_STEPS = [
   {
-    number: "01",
-    stepTag: "YOUR BUSINESS",
+    step: "01",
+    title: "Your Business",
+    subtitle: "You deliver the service.",
     icon: Building2,
-    heading: "01 — You Run the Business",
-    title: "You focus on delivering great service.",
-    description: "Your team handles operations, service delivery, and customer fulfillment.",
-    isClimax: false,
   },
   {
-    number: "02",
-    stepTag: "DIGITAL SYSTEM",
-    icon: Cpu,
-    heading: "02 — We Build the Growth System",
-    title: "We build the digital infrastructure that brings customers to you.",
-    description: "Website, booking or enquiry flow, local search, campaigns, and tracking — connected into one system.",
-    isClimax: false,
+    step: "02",
+    title: "Digital Presence",
+    subtitle: "Website, landing pages and business information.",
+    icon: Globe,
   },
   {
-    number: "03",
-    stepTag: "DISCOVERY",
-    icon: Users,
-    heading: "03 — Customers Find You",
-    title: "We put your business where customers are already looking.",
-    description: "Search, maps, and targeted campaigns generate relevant traffic and enquiries.",
-    isClimax: false,
+    step: "03",
+    title: "Visibility",
+    subtitle: "Search, local discovery and relevant campaigns.",
+    icon: Eye,
   },
   {
-    number: "04",
-    stepTag: "LEADS",
-    icon: Target,
-    heading: "04 — Every Lead Is Tracked",
-    title: "We know where each enquiry came from.",
-    description: "Calls, forms, bookings, and campaigns are tracked back to their source.",
-    isClimax: false,
+    step: "04",
+    title: "Leads",
+    subtitle: "Calls, forms and booking requests.",
+    icon: PhoneCall,
   },
   {
-    number: "05",
-    stepTag: "CUSTOMERS",
+    step: "05",
+    title: "Customers",
+    subtitle: "Qualified enquiries become completed jobs or sales.",
     icon: UserCheck,
-    heading: "05 — Leads Become Customers",
-    title: "Qualified enquiries turn into real jobs and completed services.",
-    description: "We track the customer journey from initial enquiry through completion.",
-    isClimax: false,
   },
   {
-    number: "06",
-    stepTag: "VERIFIED REVENUE",
+    step: "06",
+    title: "Verified Revenue",
+    subtitle: "Completed, paid customer revenue is tracked.",
     icon: ShieldCheck,
-    heading: "06 — Results Are Verified",
-    title: "Completed revenue is confirmed against the tracking data.",
-    description: "Only verified, attributable results are used to measure performance.",
-    isClimax: false,
   },
   {
-    number: "07",
-    stepTag: "OREAGLE EARNS",
-    icon: Award,
-    heading: "07 — We Earn From the Result",
-    title: "Our compensation is tied to verified performance.",
-    description: "Instead of relying on traditional upfront fees, our model aligns our success with the measurable results we generate.",
-    isClimax: true,
+    step: "07",
+    title: "Growth",
+    subtitle: "Use the data to improve the system.",
+    icon: TrendingUp,
   },
 ];
 
@@ -96,124 +65,66 @@ export function HowItWorks() {
         {/* Header Section */}
         <Reveal>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-            How It Works
+            The Core System
           </span>
           <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            One system. One measurable outcome.
+            From being discovered to getting paid.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-            We connect your physical business to a measurable digital customer-acquisition system — from discovery to completed revenue.
+            We connect your digital presence to a measurable customer-acquisition system.
           </p>
         </Reveal>
 
-        {/* Horizontal Journey Pipeline Bar */}
-        <Reveal delay={0.1}>
-          <div className="mt-12 overflow-x-auto pb-2 scrollbar-none">
-            <div className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-surface/80 p-3 backdrop-blur-md min-w-max">
-              {JOURNEY_PIPELINE.map((stage, idx) => (
-                <div key={stage} className="flex items-center gap-2">
-                  <div
-                    className={
-                      idx === JOURNEY_PIPELINE.length - 1
-                        ? "flex items-center gap-2 rounded-xl bg-accent/20 px-3.5 py-2 border border-accent/50 shadow-md shadow-accent/10"
-                        : "flex items-center gap-2 rounded-xl bg-white/5 px-3.5 py-2 border border-white/10"
-                    }
-                  >
-                    <span
-                      className={
-                        idx === JOURNEY_PIPELINE.length - 1
-                          ? "text-xs font-bold tracking-wider text-accent uppercase"
-                          : "text-[11px] font-semibold tracking-wider text-foreground/80 uppercase"
-                      }
-                    >
-                      {stage}
-                    </span>
-                  </div>
-                  {idx < JOURNEY_PIPELINE.length - 1 && (
-                    <ArrowRight className="size-3.5 text-accent/60 shrink-0" />
-                  )}
-                </div>
-              ))}
-            </div>
+        {/* Unified Horizontal System Process Flow Header Bar */}
+        <Reveal delay={0.1} className="mt-10 overflow-x-auto scrollbar-none pb-2">
+          <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-black/40 p-3 backdrop-blur-md min-w-max">
+            {CORE_SYSTEM_STEPS.map((s, idx) => (
+              <div key={s.step} className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-zinc-300">
+                  <span className="text-accent font-mono font-bold mr-1">{s.step}.</span>
+                  {s.title}
+                </span>
+                {idx < CORE_SYSTEM_STEPS.length - 1 && (
+                  <ArrowRight className="size-3 text-accent/50 shrink-0" />
+                )}
+              </div>
+            ))}
           </div>
         </Reveal>
 
-        {/* 7-Step Journey Cards Grid */}
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {STEPS.map((step, i) => {
-            if (step.isClimax) {
-              return (
-                /* Step 07: Visual Climax Card */
-                <Reveal key={step.heading} delay={0.2} className="sm:col-span-2 lg:col-span-3">
-                  <motion.div
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                    className="relative overflow-hidden rounded-3xl border-2 border-accent/60 bg-gradient-to-r from-accent/20 via-surface/90 to-accent/10 p-8 shadow-2xl shadow-accent/20 backdrop-blur-xl"
-                  >
-                    {/* Ambient Golden Climax Backlight */}
-                    <div className="pointer-events-none absolute -right-20 -top-20 size-72 rounded-full bg-accent/20 blur-3xl" />
-
-                    <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                      <div className="max-w-2xl">
-                        <div className="flex items-center gap-3">
-                          <span className="rounded-md border border-accent/40 bg-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent shadow-sm">
-                            THE OUTCOME • STEP 07
-                          </span>
-                          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                            {step.stepTag}
-                          </span>
-                        </div>
-
-                        <h3 className="font-display mt-4 text-2xl font-bold text-foreground sm:text-3xl">
-                          {step.title}
-                        </h3>
-                        <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-                          {step.description}
-                        </p>
-                      </div>
-
-                      <div className="flex shrink-0 items-center justify-center rounded-2xl border border-accent/40 bg-accent/20 p-5 text-accent shadow-lg">
-                        <step.icon className="size-10" />
-                      </div>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              );
-            }
-
-            return (
-              /* Steps 01 - 06 Cards */
-              <Reveal key={step.heading} delay={(i % 3) * 0.08}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className="group flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-surface/60 p-6 backdrop-blur-sm transition-colors hover:border-white/20"
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold tracking-wider text-accent/80">
-                        {step.number}
-                      </span>
-                      <div className="flex size-9 items-center justify-center rounded-lg bg-white/5 text-accent border border-white/10">
-                        <step.icon className="size-4.5" />
-                      </div>
-                    </div>
-
-                    <span className="mt-4 block text-[10px] font-bold uppercase tracking-widest text-muted">
-                      {step.stepTag}
+        {/* 7 Connected Visual System Step Cards */}
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {CORE_SYSTEM_STEPS.map((stepItem, i) => (
+            <Reveal key={stepItem.step} delay={i * 0.07} className="h-full">
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                className={`group relative flex h-full flex-col justify-between rounded-3xl border p-6 backdrop-blur-md transition-all ${
+                  i === CORE_SYSTEM_STEPS.length - 1
+                    ? "border-accent bg-accent/20 shadow-xl shadow-accent/10"
+                    : "border-white/10 bg-surface/70 hover:border-accent/40"
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold tracking-widest text-accent uppercase font-mono">
+                      STEP {stepItem.step}
                     </span>
-
-                    <h3 className="font-display mt-2 text-base font-semibold text-foreground">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-zinc-300/90">
-                      {step.description}
-                    </p>
+                    <div className="flex size-9 items-center justify-center rounded-xl bg-white/5 text-accent border border-white/10">
+                      <stepItem.icon className="size-4.5" />
+                    </div>
                   </div>
-                </motion.div>
-              </Reveal>
-            );
-          })}
+
+                  <h3 className="font-display mt-5 text-base font-bold text-foreground group-hover:text-accent transition-colors">
+                    {stepItem.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-zinc-300">
+                    {stepItem.subtitle}
+                  </p>
+                </div>
+              </motion.div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

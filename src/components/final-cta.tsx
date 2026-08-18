@@ -10,10 +10,10 @@ export function FinalCTA() {
       <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
         <Reveal>
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-            Ready to build a customer acquisition system?
+            Need more customers? Let&apos;s see if we&apos;re a fit.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-            Tell us about your business, your service area, and how customers currently find you. We&apos;ll review the opportunity and determine whether OREAGLE is a suitable fit.
+            Tell us about your business, service area and how customers currently find you. We&apos;ll review whether there&apos;s a measurable opportunity to improve your customer acquisition.
           </p>
         </Reveal>
 

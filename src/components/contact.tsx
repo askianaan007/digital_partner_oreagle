@@ -55,7 +55,7 @@ export function Contact() {
                   See if we&apos;re a fit.
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-                  A few details about your business help us understand your market, current customer acquisition, and capacity for growth before we speak.
+                  Tell us how your business currently gets customers. We&apos;ll look for where your digital acquisition can improve.
                 </p>
 
                 <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">

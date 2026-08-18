@@ -2,22 +2,37 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-const FAQS = [
+const PROMINENT_FAQS = [
   {
-    q: "Do I have to pay for the website upfront?",
+    q: "Do I pay for the website upfront?",
     a: "No traditional upfront website or marketing fee is required under the performance-based model. Commercial terms and eligibility are agreed before the partnership begins.",
   },
   {
-    q: "How exactly does OREAGLE make money?",
+    q: "How does OREAGLE make money?",
     a: "OREAGLE's compensation is tied to eligible, attributable, completed and paid customer revenue generated through the system, according to the agreed partnership terms.",
   },
   {
-    q: "How do you know which customers came from OREAGLE?",
+    q: "How do you track customers?",
     a: "We connect the customer journey across tracked channels such as calls, forms, bookings, campaigns, and other agreed sources. Attribution rules are defined before the partnership begins.",
   },
+  {
+    q: "Do I pay advertising costs?",
+    a: "Advertising arrangements depend on the partnership structure. Any advertising budget, platform costs, or third-party expenses are agreed separately before campaigns begin.",
+  },
+  {
+    q: "Do you guarantee customers?",
+    a: "No. We do not guarantee a specific number of customers, bookings, or revenue. Our focus is building, measuring, and continuously optimizing the acquisition system.",
+  },
+  {
+    q: "What makes OREAGLE different?",
+    a: "We don't position the website, advertising, SEO, tracking, and optimization as disconnected services. We connect them into one customer-acquisition system and measure the journey toward real business outcomes.",
+  },
+];
+
+const ADDITIONAL_FAQS = [
   {
     q: "What happens if a customer calls my normal business number?",
     a: "If agreed tracking is in place, eligible calls can be routed or tracked so their source can be identified. Calls that cannot be reliably attributed are not automatically treated as OREAGLE-generated revenue.",
@@ -25,10 +40,6 @@ const FAQS = [
   {
     q: "What happens if I cannot handle more customers?",
     a: "Growth only helps if your business can fulfill the demand. We discuss your service capacity before scaling acquisition and can adjust campaigns when capacity becomes limited.",
-  },
-  {
-    q: "Do I have to pay for advertising?",
-    a: "Advertising arrangements depend on the partnership structure. Any advertising budget, platform costs, or third-party expenses are agreed separately before campaigns begin.",
   },
   {
     q: "What happens if a customer cancels or receives a refund?",
@@ -47,21 +58,16 @@ const FAQS = [
     a: "The partnership can be ended according to the agreed termination terms. Any outstanding obligations, access, assets, and tracking arrangements are handled according to the agreement.",
   },
   {
-    q: "Do you guarantee a specific number of customers or jobs?",
-    a: "No. We do not guarantee a specific number of customers, bookings, or revenue. Our focus is building, measuring, and continuously optimizing the acquisition system.",
-  },
-  {
     q: "Do you work only with cleaning companies?",
     a: "No. OREAGLE is designed for service businesses that want to improve digital customer acquisition. The right fit depends on factors such as service demand, capacity, market, trackability, and willingness to work within a performance-based model.",
-  },
-  {
-    q: "What makes OREAGLE different from a normal marketing agency?",
-    a: "We don't position the website, advertising, SEO, tracking, and optimization as disconnected services. We connect them into one customer-acquisition system and measure the journey toward real business outcomes.",
   },
 ];
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [showMore, setShowMore] = useState(false);
+
+  const allFaqs = showMore ? [...PROMINENT_FAQS, ...ADDITIONAL_FAQS] : PROMINENT_FAQS;
 
   return (
     <section id="faq" className="relative py-28 sm:py-36">
@@ -79,7 +85,7 @@ export function FAQ() {
         </Reveal>
 
         <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
-          {FAQS.map((item, i) => {
+          {allFaqs.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <div key={item.q}>
@@ -87,7 +93,7 @@ export function FAQ() {
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left group"
+                  className="flex w-full items-center justify-between gap-4 py-5 text-left group cursor-pointer"
                 >
                   <span className="text-sm font-semibold text-foreground sm:text-base group-hover:text-accent transition-colors">
                     {item.q}
@@ -117,6 +123,20 @@ export function FAQ() {
             );
           })}
         </div>
+
+        {/* View All Questions Button */}
+        {!showMore && (
+          <Reveal delay={0.2} className="mt-8 text-center">
+            <button
+              type="button"
+              onClick={() => setShowMore(true)}
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-xs font-semibold text-accent transition-all hover:bg-white/10 hover:border-accent/40 cursor-pointer"
+            >
+              <Plus className="size-4" />
+              <span>View All Questions ({ADDITIONAL_FAQS.length} More)</span>
+            </button>
+          </Reveal>
+        )}
       </div>
     </section>
   );

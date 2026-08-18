@@ -7,15 +7,13 @@ import { Hero } from "@/components/hero";
 import { WelcomeScreen } from "@/components/welcome-screen";
 import { InteractiveBackground } from "@/components/background-scene";
 import { ProblemSection } from "@/components/problem-section";
-import { WhatWeManage } from "@/components/what-we-manage";
 import { HowItWorks } from "@/components/how-it-works";
+import { WhatWeManage } from "@/components/what-we-manage";
+import { CustomerJourneySection } from "@/components/customer-journey";
 import { PerformanceModel } from "@/components/performance-model";
-import { AttributionSection } from "@/components/attribution-section";
-import { NoUpfrontRisk } from "@/components/no-upfront-risk";
 import { IdealPartner } from "@/components/ideal-partner";
 import { ProofSection } from "@/components/proof-section";
 import { SelectedExperience } from "@/components/selected-experience";
-import { WhyOreagle } from "@/components/why-atomycoders";
 import { FAQ } from "@/components/faq";
 import { FinalCTA } from "@/components/final-cta";
 import { Contact } from "@/components/contact";
@@ -31,23 +29,23 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: welcomeDismissed ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className={welcomeDismissed ? "min-h-screen flex flex-col" : "pointer-events-none select-none h-screen overflow-hidden flex flex-col"}
+        transition={{ duration: 0.7, ease: "easeInOut" }}
+        className={`min-h-screen flex flex-col relative ${
+          welcomeDismissed ? "" : "pointer-events-none select-none"
+        }`}
       >
         <Navbar />
         <main className="relative flex-1">
           <InteractiveBackground />
           <Hero startAnimation={welcomeDismissed} />
           <ProblemSection />
-          <WhatWeManage />
           <HowItWorks />
+          <WhatWeManage />
+          <CustomerJourneySection />
           <PerformanceModel />
-          <AttributionSection />
-          <NoUpfrontRisk />
           <IdealPartner />
           <ProofSection />
           <SelectedExperience />
-          <WhyOreagle />
           <FAQ />
           <FinalCTA />
           <Contact />

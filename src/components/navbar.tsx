@@ -16,13 +16,11 @@ import {
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { label: "Home", href: "#top" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "What We Manage", href: "#what-we-manage" },
-  { label: "Performance Model", href: "#performance-model" },
+  { label: "Performance", href: "#performance-model" },
   { label: "Proof", href: "#proof" },
   { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
 ];
 
 const LEFT_ICONS = [
@@ -32,7 +30,7 @@ const LEFT_ICONS = [
 ];
 
 const RIGHT_ICONS = [
-  { label: "Performance Model", href: "#performance-model", icon: TrendingUp },
+  { label: "Performance", href: "#performance-model", icon: TrendingUp },
   { label: "Proof", href: "#proof", icon: ShieldCheck },
   { label: "FAQ", href: "#faq", icon: HelpCircle },
 ];
@@ -223,7 +221,7 @@ export function Navbar() {
                   {/* Shimmer Light Beam Effect */}
                   <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-12 -translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-[300%]" />
 
-                  <span className="relative z-10">Talk About Your Business</span>
+                  <span className="relative z-10">See If We&apos;re a Fit</span>
 
                   <span className="relative z-10 flex size-5 items-center justify-center rounded-full bg-black/10 transition-all duration-300 group-hover:bg-zinc-950 group-hover:text-accent group-hover:rotate-45">
                     <ArrowUpRight className="size-3.5 transition-transform" />
@@ -295,7 +293,7 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#f0d468] via-accent to-[#d4af37] px-5 py-3 text-sm font-semibold text-accent-ink transition-transform active:scale-[0.98]"
                 >
-                  <span className="relative z-10">Talk About Your Business</span>
+                  <span className="relative z-10">See If We&apos;re a Fit</span>
                   <span className="relative z-10 flex size-5 items-center justify-center rounded-full bg-black/10 text-black">
                     <ArrowUpRight className="size-3.5" />
                   </span>

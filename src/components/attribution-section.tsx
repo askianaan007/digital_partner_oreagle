@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   DollarSign,
   ShieldCheck,
-  ArrowRight,
   Sparkles,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
@@ -22,66 +21,53 @@ const CHANNELS = [
   "Direct Enquiries",
 ];
 
-const JOURNEY_NODES = [
+const ATTRIBUTION_NODES = [
   {
-    id: "discovery",
-    label: "Discovery",
+    id: "source",
+    label: "SOURCE",
     sublabel: "Google / Maps / Social",
     icon: Search,
   },
   {
     id: "lead",
-    label: "Lead",
+    label: "LEAD",
     sublabel: "Call / Form / Enquiry",
     icon: PhoneCall,
   },
   {
     id: "booking",
-    label: "Booking",
+    label: "BOOKING",
     sublabel: "Scheduled / Confirmed",
     icon: CalendarCheck,
   },
   {
     id: "completed",
-    label: "Completed Job",
+    label: "COMPLETED JOB",
     sublabel: "Service Delivered",
     icon: CheckCircle2,
   },
   {
     id: "paid",
-    label: "Paid Revenue",
+    label: "PAID REVENUE",
     sublabel: "Payment Processed",
     icon: DollarSign,
   },
   {
     id: "attribution",
-    label: "Verified Attribution",
+    label: "VERIFIED ATTRIBUTION",
     sublabel: "Confirmed Source",
     icon: ShieldCheck,
   },
 ];
 
-const SAMPLE_RECORD = {
-  recordId: "REC-84920",
-  source: "Google Search (Local Search Campaign)",
-  leadType: "Phone Call (Verified 04:12 Duration)",
-  booking: "Appointment Confirmed & Scheduled",
-  completedJob: "Service Delivered & Signed",
-  paidRevenue: "$480.00",
-  attributionStatus: "Confirmed & Attributable",
-  eligibleRevenue: "$480.00",
-};
-
 export function AttributionSection() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [isFullGlow, setIsFullGlow] = useState(false);
 
-  // Animated continuous journey loop through nodes
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveStepIndex((prev) => {
-        const next = (prev + 1) % JOURNEY_NODES.length;
-        // Trigger brief full path illumination when reaching Paid Revenue (step 4 / 5)
+        const next = (prev + 1) % ATTRIBUTION_NODES.length;
         if (next === 4 || next === 5) {
           setIsFullGlow(true);
           setTimeout(() => setIsFullGlow(false), 1400);
@@ -102,10 +88,10 @@ export function AttributionSection() {
             Attribution
           </span>
           <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            From first click to paid job. Nothing gets lost.
+            From first enquiry to paid job.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-            OREAGLE connects marketing activity to real customer outcomes — tracking the journey from where a customer finds you to when the job is completed and paid.
+            Every customer opportunity can be connected back to its source, so both sides can see what the system actually generated.
           </p>
         </Reveal>
 
@@ -126,7 +112,7 @@ export function AttributionSection() {
           </div>
         </Reveal>
 
-        {/* SINGLE GLOWING GOLD PATH JOURNEY VISUALIZATION */}
+        {/* SINGLE GLOWING GOLD PATH VISUAL */}
         <Reveal delay={0.15} className="mt-14">
           <div
             className={`relative overflow-hidden rounded-3xl border transition-all duration-700 ${
@@ -135,7 +121,6 @@ export function AttributionSection() {
                 : "border-white/10 bg-surface/60 shadow-xl"
             } p-6 sm:p-10 backdrop-blur-md`}
           >
-            {/* Ambient Lighting Flash on Full Path Illumination */}
             <AnimatePresence>
               {isFullGlow && (
                 <motion.div
@@ -152,17 +137,16 @@ export function AttributionSection() {
               <div className="flex items-center gap-2">
                 <Sparkles className="size-4 text-accent" />
                 <span className="text-xs font-bold uppercase tracking-wider text-accent">
-                  Live Customer Journey Tracker
+                  Attribution Path Visualizer
                 </span>
               </div>
               <span className="text-[11px] text-zinc-400 font-mono">
-                Stage {activeStepIndex + 1} of {JOURNEY_NODES.length}
+                Stage {activeStepIndex + 1} of {ATTRIBUTION_NODES.length}
               </span>
             </div>
 
-            {/* Glowing Journey Nodes Pipeline */}
             <div className="relative grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-              {JOURNEY_NODES.map((node, idx) => {
+              {ATTRIBUTION_NODES.map((node, idx) => {
                 const isActive = idx === activeStepIndex;
                 const isPassed = idx <= activeStepIndex || isFullGlow;
 
@@ -203,7 +187,6 @@ export function AttributionSection() {
                       </p>
                     </div>
 
-                    {/* Active Pulsing Status Dot */}
                     {isActive && (
                       <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold uppercase text-accent">
                         <motion.span
@@ -221,65 +204,12 @@ export function AttributionSection() {
           </div>
         </Reveal>
 
-        {/* ILLUSTRATIVE TRACKING VIEW (REAL-WORLD SAMPLE RECORD) */}
-        <Reveal delay={0.2} className="mt-10">
-          <div className="rounded-3xl border border-white/10 bg-black/40 p-6 sm:p-8 backdrop-blur-md">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-4 mb-6">
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                  Illustrative Tracking View
-                </span>
-                <h4 className="font-display text-lg font-bold text-foreground mt-0.5">
-                  Verified Customer Record ({SAMPLE_RECORD.recordId})
-                </h4>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 text-xs font-semibold text-emerald-400">
-                <CheckCircle2 className="size-3.5" />
-                Verified & Attributable
-              </span>
-            </div>
-
-            {/* Record Table / Grid */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-surface/50 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Source</span>
-                <p className="font-semibold text-sm text-foreground mt-1">{SAMPLE_RECORD.source}</p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-surface/50 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Lead Type</span>
-                <p className="font-semibold text-sm text-foreground mt-1">{SAMPLE_RECORD.leadType}</p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-surface/50 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Booking Status</span>
-                <p className="font-semibold text-sm text-foreground mt-1">{SAMPLE_RECORD.booking}</p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-surface/50 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Completed Job</span>
-                <p className="font-semibold text-sm text-foreground mt-1">{SAMPLE_RECORD.completedJob}</p>
-              </div>
-
-              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/30 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400">Paid Revenue</span>
-                <p className="font-display font-bold text-lg text-emerald-300 mt-1">{SAMPLE_RECORD.paidRevenue}</p>
-              </div>
-
-              <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-accent">OREAGLE Eligible Revenue</span>
-                <p className="font-display font-bold text-lg text-accent mt-1">{SAMPLE_RECORD.eligibleRevenue}</p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* COMMERCIAL COMPLIANCE FOOTNOTE CALLOUT BOX */}
+        {/* Small Explanation */}
         <Reveal delay={0.25} className="mt-8">
           <div className="flex items-start gap-4 rounded-2xl border border-accent/30 bg-accent/10 p-5 backdrop-blur-md">
             <ShieldCheck className="size-5 shrink-0 text-accent mt-0.5" />
             <p className="text-xs leading-relaxed text-zinc-300">
-              <span className="font-semibold text-accent">Commercial Agreement Terms:</span> Commission applies only to eligible, attributable, completed and paid jobs under the agreed partnership terms.
+              Calls, forms, campaign tracking and agreed attribution methods help connect customer activity to completed revenue.
             </p>
           </div>
         </Reveal>

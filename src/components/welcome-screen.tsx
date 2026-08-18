@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -12,18 +12,8 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
   const [isVisible, setIsVisible] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    // Disabled session caching for development so intro displays on every reload
-    // const seen = sessionStorage.getItem("atomy_welcome_seen");
-    // if (seen === "true") {
-    //   setIsVisible(false);
-    //   onDismiss?.();
-    // }
-  }, [onDismiss]);
-
   const handleDismiss = () => {
     setIsVisible(false);
-    // sessionStorage.setItem("atomy_welcome_seen", "true");
     onDismiss?.();
   };
 
@@ -31,10 +21,12 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }}
-          transition={{ duration: 0.8 }}
+          exit={{
+            opacity: 0,
+            transition: { duration: 0.7, ease: "easeInOut" },
+          }}
           className="fixed inset-0 z-[100] flex flex-col justify-between bg-[#0b0c0f] text-foreground select-none overflow-hidden"
         >
           {/* Cinematic Eagle Flight Video Background */}
@@ -54,41 +46,41 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
           </div>
 
           {/* Top Bar Header */}
-          <div className="relative z-10 flex items-center justify-between px-6 py-6 sm:px-10">
-            <div className="flex items-center gap-3">
+          <div className="relative z-10 flex items-center justify-between px-4 py-4 sm:px-8 sm:py-6">
+            <div className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo_potrait.png"
                 alt="OREAGLE"
-                className="h-18 sm:h-24 w-auto brightness-0 invert opacity-100"
+                className="h-10 sm:h-16 md:h-20 w-auto brightness-0 invert opacity-100 object-contain transition-all"
               />
             </div>
-            
+
             <button
               onClick={handleDismiss}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-2 text-xs font-medium uppercase tracking-wider text-foreground backdrop-blur-md transition-all hover:border-accent hover:bg-black/70 active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/50 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-foreground backdrop-blur-md transition-all hover:border-accent hover:bg-black/80 active:scale-95 cursor-pointer"
             >
-              Skip Intro
+              <span>Skip Intro</span>
               <ArrowRight className="size-3 text-accent" />
             </button>
           </div>
 
           {/* Center Title & Messaging with Soft Black Fade Backdrop */}
-          <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 text-center">
-            <div className="rounded-2xl bg-black/30 border border-white/10 px-6 py-8 sm:p-8">
+          <div className="relative z-10 mx-auto max-w-2xl px-4 text-center my-auto">
+            <div className="rounded-3xl bg-black/40 border border-white/10 p-5 sm:p-8 backdrop-blur-md shadow-2xl">
               <motion.p
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-accent"
+                className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-accent"
               >
-                PERFORMANCE BASED DIGITAL GROWTH PARTNER
+                PERFORMANCE-BASED CUSTOMER ACQUISITION
               </motion.p>
               <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.45 }}
-                className="font-display mt-3 text-3xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl lg:text-6xl"
+                className="font-display mt-2 sm:mt-3 text-2xl font-bold tracking-tight text-white drop-shadow-lg sm:text-4xl lg:text-5xl"
               >
                 You run the business.
                 <br />
@@ -98,7 +90,7 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="mt-4 text-sm sm:text-base text-white/90 max-w-xl mx-auto leading-relaxed drop-shadow"
+                className="mt-3 text-xs sm:text-base text-zinc-200/90 max-w-lg mx-auto leading-relaxed drop-shadow"
               >
                 You focus on delivering your service. We build and manage the digital system that brings you customers.
               </motion.p>
@@ -106,15 +98,15 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
           </div>
 
           {/* Bottom Bar Call to Action */}
-          <div className="relative z-10 flex flex-col items-center gap-3 px-6 pb-10">
+          <div className="relative z-10 flex flex-col items-center gap-2 px-4 pb-6 sm:pb-10">
             <button
               onClick={handleDismiss}
-              className="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-accent-ink transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent/20"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-bold text-zinc-950 transition-all hover:bg-white hover:scale-105 active:scale-95 shadow-xl shadow-accent/20 cursor-pointer"
             >
-              Enter Experience
+              <span>Enter Experience</span>
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </button>
-            <span className="text-[11px] uppercase tracking-widest text-muted/70">
+            <span className="text-[10px] sm:text-[11px] font-medium tracking-widest text-zinc-400 uppercase">
               CLICK OR WAIT FOR VIDEO TO COMPLETE
             </span>
           </div>

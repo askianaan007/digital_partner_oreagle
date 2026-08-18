@@ -41,13 +41,13 @@ export function SelectedExperience() {
         {/* Header Section */}
         <Reveal>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-            Selected Digital Experience
+            Technical Experience
           </span>
           <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            Built by a team that knows how to build serious digital systems.
+            Technical experience behind the system.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-            Before OREAGLE, our team built and shipped platforms across education, housing, marketplaces, and other digital products. That experience now supports the systems we build for customer acquisition, conversion, tracking, and growth.
+            Our previous digital products demonstrate the technical experience behind the systems we build today.
           </p>
         </Reveal>
 
