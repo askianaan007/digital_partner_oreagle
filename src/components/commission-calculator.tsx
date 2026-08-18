@@ -1,28 +1,29 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { calculateCommission } from "@/lib/commission";
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
+import {
+  calculatePerformanceModel,
+  formatCurrency,
+  formatPercent,
+  TierBreakdown,
+} from "@/lib/commission";
 
 const PRESETS = [10000, 50000, 100000, 250000, 500000, 1000000];
 const MAX_REVENUE = 1000000;
 
 export function CommissionCalculator() {
   const [revenue, setRevenue] = useState(50000);
-  const result = useMemo(() => calculateCommission(revenue), [revenue]);
 
-  // Format effective rate mathematically exact (e.g. 1%, 1.8%, 2.25%, 2.88%, 2.994%)
-  const formattedEffectiveRate = useMemo(() => {
-    if (result.revenue <= 0) return "0%";
-    const ratePercentage = result.effectiveRate * 100;
-    // Format up to 3 decimal places without trailing zeros
-    return `${parseFloat(ratePercentage.toFixed(3))}%`;
-  }, [result]);
+  const result = useMemo(() => {
+    // 50 completed jobs with variable average customer value to match total revenue input
+    const averageValue = revenue > 0 ? revenue / 50 : 0;
+    return calculatePerformanceModel({
+      completedJobs: 50,
+      averageCustomerValue: averageValue,
+      attributionRate: 1.0, // 100% attributable for simple slider illustration
+      advertisingSpend: 0,
+    });
+  }, [revenue]);
 
   return (
     <div className="rounded-3xl border border-accent/30 bg-surface/80 p-6 shadow-2xl backdrop-blur-md sm:p-8">
@@ -59,68 +60,50 @@ export function CommissionCalculator() {
             step={1000}
             value={revenue}
             onChange={(e) => setRevenue(Number(e.target.value))}
-            className="h-2 flex-1 cursor-pointer appearance-none rounded-full bg-white/10 accent-accent"
-            aria-valuetext={currency.format(revenue)}
+            className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/10 accent-accent"
           />
         </div>
 
-        {/* Preset Selection Buttons */}
+        {/* Quick Presets */}
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider mr-1">
-            Quick Select:
-          </span>
-          {PRESETS.map((val) => (
+          <span className="mr-1 text-xs text-zinc-500 font-medium">Quick presets:</span>
+          {PRESETS.map((preset) => (
             <button
-              key={val}
+              key={preset}
               type="button"
-              onClick={() => setRevenue(val)}
-              className={`rounded-xl border px-3 py-1.5 text-xs font-medium transition-all ${
-                revenue === val
-                  ? "border-accent bg-accent/20 text-accent font-semibold"
-                  : "border-white/10 bg-white/5 text-zinc-300 hover:border-white/20 hover:bg-white/10"
+              onClick={() => setRevenue(preset)}
+              className={`rounded-full px-3 py-1 text-xs font-mono transition-colors cursor-pointer ${
+                revenue === preset
+                  ? "bg-accent text-zinc-950 font-bold"
+                  : "bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white"
               }`}
             >
-              {currency.format(val)}
+              {formatCurrency(preset)}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Main Calculation Results Grid */}
-      <div className="mt-8 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+      {/* Primary KPI Results Grid */}
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            Monthly Revenue
-          </p>
-          <p className="font-display mt-2 text-xl font-bold text-foreground sm:text-2xl">
-            {currency.format(result.revenue)}
+          <p className="text-xs font-medium text-zinc-400">Total Customer Revenue</p>
+          <p className="font-display mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+            {formatCurrency(result.totalCustomerRevenue)}
           </p>
         </div>
 
-        <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4 shadow-md shadow-accent/5">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-accent">
-            OREAGLE Commission
-          </p>
-          <p className="font-display mt-2 text-xl font-bold text-accent sm:text-2xl">
-            {currency.format(result.totalCommission)}
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400">
-            You Retain
-          </p>
-          <p className="font-display mt-2 text-xl font-bold text-emerald-300 sm:text-2xl">
-            {currency.format(result.clientRetains)}
+        <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4">
+          <p className="text-xs font-medium text-accent">OREAGLE Performance Fee</p>
+          <p className="font-display mt-2 text-2xl font-bold text-accent sm:text-3xl">
+            {formatCurrency(result.oreagleFee)}
           </p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            Effective Rate
-          </p>
-          <p className="font-display mt-2 text-xl font-bold text-foreground sm:text-2xl">
-            {formattedEffectiveRate}
+          <p className="text-xs font-medium text-zinc-400">Effective Rate</p>
+          <p className="font-display mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+            {formatPercent(result.effectiveFeeRate)}
           </p>
         </div>
       </div>
@@ -128,10 +111,10 @@ export function CommissionCalculator() {
       {/* Progressive Tier Breakdown Details */}
       <div className="mt-8 rounded-2xl border border-white/10 bg-black/30 p-5">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
-          Progressive Calculation Breakdown
+          Progressive Tier Calculation Breakdown
         </h4>
         <div className="mt-4 space-y-2.5">
-          {result.breakdown.map((bracket) => (
+          {result.tierBreakdown.map((bracket: TierBreakdown) => (
             <div
               key={bracket.label}
               className="flex items-center justify-between gap-4 text-xs sm:text-sm"
@@ -141,8 +124,8 @@ export function CommissionCalculator() {
                 <span className="font-semibold text-accent">@ {bracket.rate * 100}%</span>
               </span>
               <span className="font-mono text-foreground">
-                {currency.format(bracket.amountInBracket)} →{" "}
-                <span className="font-semibold text-accent">{currency.format(bracket.commission)}</span>
+                {formatCurrency(bracket.tierAttributableRevenue)} →{" "}
+                <span className="font-semibold text-accent">{formatCurrency(bracket.fee)}</span>
               </span>
             </div>
           ))}
@@ -150,7 +133,7 @@ export function CommissionCalculator() {
       </div>
 
       <p className="mt-5 text-[11px] leading-relaxed text-zinc-400">
-        Illustrative calculator demonstrating progressive tier math ($0–$1k @ 1%, $1k–$5k @ 2%, $5k+ @ 3%). Commercial terms subject to final partnership agreement.
+        Illustrative performance calculator demonstrating progressive tier economics (0–$10k @ 5%, $10k–$25k @ 7.5%, $25k+ @ 10%). Commercial terms subject to final partnership agreement.
       </p>
     </div>
   );
