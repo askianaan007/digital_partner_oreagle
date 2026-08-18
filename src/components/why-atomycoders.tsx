@@ -8,14 +8,14 @@ const PRINCIPLES = [
   { number: "05", title: "Measured revenue impact over vanity metrics" },
 ];
 
-export function WhyAtomyCoders() {
+export function WhyOreagle() {
   return (
     <section id="why-us" className="relative py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-start">
           <Reveal>
             <span className="text-xs font-medium uppercase tracking-widest text-accent">
-              Why AtomyCoders
+              Why OREAGLE
             </span>
             <h2 className="font-display mt-4 max-w-lg text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
               We don&apos;t get paid to deliver pages. We get paid to build a

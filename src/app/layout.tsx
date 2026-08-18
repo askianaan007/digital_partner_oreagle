@@ -15,9 +15,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "AtomyCoders — Performance-Based Digital Growth for NYC Cleaning Businesses",
+  title: "OREAGLE — Performance-Based Digital Growth Partner",
   description:
-    "AtomyCoders builds and manages the digital customer-acquisition system for Brooklyn & Queens cleaning businesses — website, booking, local SEO, lead generation, and call tracking — with no traditional upfront fee. We earn from the jobs our system generates.",
+    "OREAGLE builds and manages the digital customer-acquisition system for ambitious businesses — website, booking, local SEO, lead generation, and call tracking — with no traditional upfront fee. We earn from the jobs our system generates.",
 };
 
 export const viewport: Viewport = {

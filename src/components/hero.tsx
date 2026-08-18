@@ -1,63 +1,88 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { GrowthMindMap } from "@/components/growth-mind-map";
+import { ArrowUpRight, ArrowRight, ShieldCheck } from "lucide-react";
+import { GrowthScene } from "@/components/growth-scene";
 
-const HEADLINE = ["Your business.", "Built to grow online."];
+const HEADLINE_LINES = ["Your business.", "Built to grow", "online."];
 
-const container = {
+const FLOW_STEPS = [
+  "Website",
+  "Visibility",
+  "Leads",
+  "Booking",
+  "Attribution",
+  "Growth",
+];
+
+const containerVariants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.12 },
   },
 };
 
-const line = {
+const lineVariants = {
   hidden: { y: "110%" },
   show: {
     y: "0%",
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
-export function Hero() {
+interface HeroProps {
+  startAnimation?: boolean;
+}
+
+export function Hero({ startAnimation = true }: HeroProps) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden pt-28 pb-16"
+      className="relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-24"
     >
+      {/* Ambient Lighting & Background Setup */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[#0b0c0f]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_78%_45%,#121312_0%,#0d0e0e_55%,#080909_100%)]" />
+        {/* Subtle Radial Gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_75%_42%,#14161b_0%,#0c0d10_55%,#08090b_100%)]" />
+
+        {/* Soft Golden Volumetric Lighting Aura behind 3D Scene */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.18 }}
-          transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute right-0 top-1/2 size-[42rem] -translate-y-1/2 rounded-full bg-accent blur-[160px]"
+          animate={{ opacity: startAnimation ? 0.16 : 0 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="absolute right-0 top-1/2 size-[44rem] -translate-y-1/2 rounded-full bg-accent blur-[170px]"
         />
       </div>
 
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-[0.85fr_1fr] lg:gap-10 lg:px-8">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[0.88fr_1fr] lg:gap-10 lg:px-8">
+        {/* Left Column: Typography, Business Positioning & CTAs */}
         <div className="flex flex-col">
-          <motion.span
+          {/* Eyebrow Badge */}
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-medium uppercase tracking-widest text-accent"
+            className="inline-flex items-center gap-2"
           >
-            Digital Growth Partner
-          </motion.span>
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+              Performance-Based Digital Growth Partner
+            </span>
+          </motion.div>
 
-          <h1 className="font-display mt-8 max-w-lg text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
+          {/* Main Headline */}
+          <h1 className="font-display mt-6 max-w-lg text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[3.65rem]">
             <motion.span
-              variants={container}
+              variants={containerVariants}
               initial="hidden"
-              animate="show"
+              animate={startAnimation ? "show" : "hidden"}
               className="block"
             >
-              {HEADLINE.map((text) => (
+              {HEADLINE_LINES.map((text, idx) => (
                 <span key={text} className="block overflow-hidden pb-1">
-                  <motion.span variants={line} className="block">
+                  <motion.span
+                    variants={lineVariants}
+                    className={idx === 2 ? "block text-accent" : "block"}
+                  >
                     {text}
                   </motion.span>
                 </span>
@@ -65,57 +90,87 @@ export function Hero() {
             </motion.span>
           </h1>
 
+          {/* Supporting Text based on Master Business Context */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-6 max-w-md text-lg text-muted"
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="mt-6 max-w-md text-base leading-relaxed text-muted sm:text-lg"
           >
-            We build, manage and optimize the digital systems that help
-            businesses get discovered, generate leads, convert customers and
-            grow.
+            You run your physical business. We build, manage, and optimize the
+            complete digital customer-acquisition system that gets you discovered,
+            generates leads, converts customers, and drives revenue.
           </motion.p>
 
+          {/* Value Model Highlight Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="mt-4 flex items-center gap-2 text-xs font-medium text-accent/90"
+          >
+            <ShieldCheck className="size-4 shrink-0 text-accent" />
+            <span>No traditional upfront fee • Earned on attributable performance</span>
+          </motion.div>
+
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.6, delay: 0.65 }}
             className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
             <a
               href="#contact"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-ink transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-ink transition-transform hover:scale-[1.03] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Talk About Your Business
               <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
             <a
               href="#how-it-works"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface/50 px-6 py-3.5 text-sm font-medium text-foreground backdrop-blur-xs transition-colors hover:border-accent/40 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               See How It Works
             </a>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="mt-5 text-xs uppercase tracking-widest text-muted"
+          {/* System Pipeline Journey Indicator */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.7, delay: 0.85 }}
+            className="mt-10 pt-4 border-t border-border/40"
           >
-            Build <span className="text-accent">•</span> Acquire{" "}
-            <span className="text-accent">•</span> Convert{" "}
-            <span className="text-accent">•</span> Optimize
-          </motion.p>
+            <div className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted/90">
+              {FLOW_STEPS.map((step, idx) => (
+                <div key={step} className="flex items-center gap-2">
+                  <span
+                    className={
+                      idx === FLOW_STEPS.length - 1
+                        ? "text-accent font-semibold"
+                        : "text-foreground/90"
+                    }
+                  >
+                    {step}
+                  </span>
+                  {idx < FLOW_STEPS.length - 1 && (
+                    <ArrowRight className="size-3 text-accent/60" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
+        {/* Right Column: Premium 3D Animated Growth System Scene */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={startAnimation ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
           className="flex justify-center lg:justify-end"
         >
-          <GrowthMindMap />
+          <GrowthScene />
         </motion.div>
       </div>
     </section>

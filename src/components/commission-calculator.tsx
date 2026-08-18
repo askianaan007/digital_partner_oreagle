@@ -41,7 +41,7 @@ export function CommissionCalculator() {
         {[
           { label: "Revenue", value: currency.format(result.revenue) },
           {
-            label: "AtomyCoders commission",
+            label: "OREAGLE commission",
             value: currency.format(result.totalCommission),
           },
           { label: "You retain", value: currency.format(result.clientRetains) },

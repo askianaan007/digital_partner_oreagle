@@ -100,7 +100,7 @@ export function WhatWeManage() {
             One digital growth partner. Not five separate vendors.
           </h2>
           <p className="mt-5 max-w-xl text-muted">
-            AtomyCoders operates as your outsourced digital growth
+            OREAGLE operates as your outsourced digital growth
             department — one integrated system instead of five disconnected
             tools.
           </p>

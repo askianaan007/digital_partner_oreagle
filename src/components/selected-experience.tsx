@@ -47,7 +47,7 @@ export function SelectedExperience() {
             Technical execution, proven elsewhere.
           </h2>
           <p className="mt-5 max-w-xl text-muted">
-            Before AtomyCoders focused on cleaning-business growth, the team
+            Before OREAGLE focused on cleaning-business growth, the team
             built and shipped platforms across education, housing, and
             marketplace software. Same team, same discipline — now applied to
             customer acquisition for local service businesses.
