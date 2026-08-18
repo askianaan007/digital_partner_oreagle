@@ -149,7 +149,7 @@ function BackgroundSceneContent({ isMobile }: { isMobile: boolean }) {
   return (
     <group ref={sceneGroup}>
       <ambientLight intensity={0.2} />
-      
+
       {/* Interactive Mouse Spotlight (Golden Glow following Cursor in 3D) */}
       <pointLight
         ref={lightRef}

@@ -12,7 +12,6 @@ import { HowItWorks } from "@/components/how-it-works";
 import { PerformanceModel } from "@/components/performance-model";
 import { AttributionSection } from "@/components/attribution-section";
 import { NoUpfrontRisk } from "@/components/no-upfront-risk";
-import { ServiceArea } from "@/components/service-area";
 import { IdealPartner } from "@/components/ideal-partner";
 import { ProofSection } from "@/components/proof-section";
 import { SelectedExperience } from "@/components/selected-experience";
@@ -45,7 +44,6 @@ export default function Home() {
           <PerformanceModel />
           <AttributionSection />
           <NoUpfrontRisk />
-          <ServiceArea />
           <IdealPartner />
           <ProofSection />
           <SelectedExperience />

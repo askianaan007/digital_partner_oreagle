@@ -142,7 +142,7 @@ export function Navbar() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/logo.svg"
+                  src="/logo.png"
                   alt="OREAGLE Logo"
                   className="h-9 sm:h-11 w-auto brightness-0 invert opacity-100 transition-transform hover:scale-110"
                 />
@@ -181,13 +181,13 @@ export function Navbar() {
               transition={{ duration: 0.35, ease: "easeOut" }}
               className="flex w-full items-center justify-between"
             >
-              {/* Left: OREAGLE Abstract Logo Icon */}
+              {/* Left: OREAGLE Landscape Logo */}
               <a href="#top" className="flex items-center group shrink-0 py-0.5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/logo.svg"
+                  src="/logo_lanscape.png"
                   alt="OREAGLE Logo"
-                  className="h-7 sm:h-8 w-auto brightness-0 invert opacity-95 transition-transform group-hover:scale-105"
+                  className="h-8 sm:h-9 w-auto brightness-0 invert opacity-100 transition-transform group-hover:scale-105"
                 />
               </a>
 

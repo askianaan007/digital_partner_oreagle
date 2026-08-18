@@ -58,7 +58,7 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
             <div className="flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/logo_with_text.svg"
+                src="/logo_potrait.png"
                 alt="OREAGLE"
                 className="h-18 sm:h-24 w-auto brightness-0 invert opacity-100"
               />
@@ -82,10 +82,10 @@ export function WelcomeScreen({ onDismiss }: WelcomeScreenProps) {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="text-xs font-semibold uppercase tracking-[0.3em] text-accent"
               >
-                PERFORMANCE-BASED DIGITAL GROWTH PARTNER
+                PERFORMANCE BASED DIGITAL GROWTH PARTNER
               </motion.p>
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.45 }}
                 className="font-display mt-3 text-3xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl lg:text-6xl"

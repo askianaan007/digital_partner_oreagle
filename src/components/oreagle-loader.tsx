@@ -37,7 +37,7 @@ export function OreagleLoader({
   className = "",
   onClose,
 }: OreagleLoaderProps) {
-  // Coordinates matching the exact bounding box (275, 286, 278, 184) from logo.svg
+  // Coordinates matching the exact bounding box (275, 286, 278, 184) from logo.png
   const stroke1Path = "M 278 440 C 330 380, 430 325, 552 298 C 445 348, 360 395, 278 440 Z";
   const stroke2Path = "M 312 426 C 362 408, 418 392, 466 390 C 418 410, 362 424, 312 426 Z";
 
@@ -128,7 +128,7 @@ export function OreagleLoader({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo.svg"
+            src="/logo.png"
             alt="OREAGLE Symbol"
             style={{
               width: size,

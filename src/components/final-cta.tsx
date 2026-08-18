@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 export function FinalCTA() {
@@ -9,12 +9,11 @@ export function FinalCTA() {
     <section className="relative py-28 sm:py-36">
       <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
         <Reveal>
-          <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
             Ready to build a customer acquisition system?
           </h2>
-          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-muted">
-            Tell us about your cleaning business, your service area, and
-            where your customers currently come from.
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
+            Tell us about your business, your service area, and how customers currently find you. We&apos;ll review the opportunity and determine whether OREAGLE is a suitable fit.
           </p>
         </Reveal>
 
@@ -27,17 +26,17 @@ export function FinalCTA() {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-ink transition-transform hover:scale-105"
+            className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full bg-accent px-8 py-4 text-sm font-bold text-zinc-950 shadow-xl shadow-accent/20 transition-all duration-300 hover:bg-white hover:scale-105 active:scale-95"
           >
-            See If We&apos;re a Fit
-            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <span>See If We&apos;re a Fit</span>
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a
             href="mailto:atomycoders@gmail.com"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-surface"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-medium text-foreground backdrop-blur-xl transition-all duration-300 hover:border-accent/60 hover:bg-white/12"
           >
-            <Mail className="size-4" />
-            Talk to Us
+            <Mail className="size-4 text-accent" />
+            <span>Talk to Us</span>
           </a>
         </motion.div>
       </div>

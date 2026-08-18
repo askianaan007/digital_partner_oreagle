@@ -15,7 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "OREAGLE — Performance-Based Digital Growth Partner",
+  title: "OREAGLE — Performance Based Digital Growth Partner",
   description:
     "OREAGLE builds and manages the digital customer-acquisition system for ambitious businesses — website, booking, local SEO, lead generation, and call tracking — with no traditional upfront fee. We earn from the jobs our system generates.",
 };
