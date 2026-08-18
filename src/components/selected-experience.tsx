@@ -121,7 +121,7 @@ export function SelectedExperience() {
           <div className="flex items-start gap-4 rounded-2xl border border-white/15 bg-black/50 p-5 backdrop-blur-md">
             <Info className="size-5 shrink-0 text-accent mt-0.5" />
             <p className="text-xs leading-relaxed text-zinc-300">
-              <span className="font-semibold text-accent">Technical Experience Disclaimer:</span> These projects demonstrate our team&apos;s previous technical experience. They are not presented as OREAGLE customer-acquisition case studies. OREAGLE-specific performance results will be published as verified pilots are completed.
+              <span className="font-semibold text-accent">Technical Experience Disclaimer:</span> These projects demonstrate our team&apos;s previous technical experience. They are not presented as OREAGLE customer acquisition case studies. OREAGLE-specific performance results will be published as verified pilots are completed.
             </p>
           </div>
         </Reveal>

@@ -74,7 +74,7 @@ export function Contact() {
                 <div className="mt-6 flex items-start gap-3 rounded-2xl border border-accent/20 bg-accent/10 p-5">
                   <ShieldCheck className="size-5 text-accent shrink-0 mt-0.5" />
                   <p className="text-xs text-zinc-300 leading-relaxed">
-                    We review all submissions confidentially to evaluate digital customer-acquisition opportunities for your service area.
+                    We review all submissions confidentially to evaluate digital customer acquisition opportunities for your service area.
                   </p>
                 </div>
               </Reveal>

@@ -41,7 +41,7 @@ export function Hero({ startAnimation = true }: HeroProps) {
 
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center">
-          
+
           {/* LEFT COLUMN: Eyebrow, Headline, Subtext, Tags, CTAs */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             {/* Eyebrow Badge */}
@@ -66,7 +66,7 @@ export function Hero({ startAnimation = true }: HeroProps) {
               >
                 We turn your online presence into a{" "}
                 <span className="block text-accent font-bold mt-1 sm:mt-2">
-                  <span className="whitespace-nowrap">customer-acquisition</span> system.
+                  <span className="whitespace-nowrap">customer acquisition</span> system.
                 </span>
               </motion.span>
             </h1>
@@ -159,11 +159,10 @@ export function Hero({ startAnimation = true }: HeroProps) {
                     initial={{ opacity: 0, x: 20 }}
                     animate={startAnimation ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                     transition={{ delay: 0.5 + idx * 0.1 }}
-                    className={`flex items-center justify-between rounded-2xl border px-4 py-3 transition-all ${
-                      idx === PROCESS_STEPS.length - 1
-                        ? "border-accent/60 bg-accent/20 text-accent font-bold shadow-lg shadow-accent/10"
-                        : "border-white/10 bg-black/40 text-zinc-200"
-                    }`}
+                    className={`flex items-center justify-between rounded-2xl border px-4 py-3 transition-all ${idx === PROCESS_STEPS.length - 1
+                      ? "border-accent/60 bg-accent/20 text-accent font-bold shadow-lg shadow-accent/10"
+                      : "border-white/10 bg-black/40 text-zinc-200"
+                      }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-[11px] font-mono font-bold text-accent">

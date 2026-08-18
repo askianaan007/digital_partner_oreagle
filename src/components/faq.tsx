@@ -28,7 +28,7 @@ const PROMINENT_FAQS = [
   },
   {
     q: "What makes OREAGLE different?",
-    a: "We don't position the website, advertising, SEO, tracking, and optimization as disconnected services. We connect them into one customer-acquisition system and measure the journey toward real business outcomes.",
+    a: "We don't position the website, advertising, SEO, tracking, and optimization as disconnected services. We connect them into one customer acquisition system and measure the journey toward real business outcomes.",
   },
 ];
 

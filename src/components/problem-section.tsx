@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, MailX, HelpCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Search, MailX, HelpCircle } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 const THREE_PROBLEMS = [
@@ -60,11 +60,10 @@ export function ProblemSection() {
                       <prob.icon className="size-5" />
                     </div>
                   </div>
-
-                  <h3 className="font-display mt-6 text-xl font-bold text-foreground group-hover:text-red-400 transition-colors">
+                  <h3 className="font-display mt-6 text-xl font-bold text-foreground">
                     {prob.title}
                   </h3>
-                  <p className="mt-3 text-xs leading-relaxed text-zinc-300">
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-400">
                     {prob.description}
                   </p>
                 </div>
@@ -72,18 +71,6 @@ export function ProblemSection() {
             </Reveal>
           ))}
         </div>
-
-        {/* Finishing Gap Statement */}
-        <Reveal delay={0.25} className="mt-12">
-          <div className="relative overflow-hidden rounded-3xl border border-accent/40 bg-gradient-to-r from-accent/20 via-surface/90 to-accent/10 p-8 text-center backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center justify-center gap-3">
-              <CheckCircle2 className="size-6 text-accent shrink-0" />
-              <p className="font-display text-xl sm:text-2xl font-bold text-foreground">
-                That&apos;s the gap OREAGLE solves.
-              </p>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

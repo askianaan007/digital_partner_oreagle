@@ -71,7 +71,7 @@ export function HowItWorks() {
             From being discovered to getting paid.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-            We connect your digital presence to a measurable customer-acquisition system.
+            We connect your digital presence to a measurable customer acquisition system.
           </p>
         </Reveal>
 

@@ -32,7 +32,7 @@ export function ProofSection() {
             We&apos;re building the proof — honestly.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300/90 sm:text-lg">
-            OREAGLE is currently validating its first customer-acquisition partnership. We&apos;re tracking the journey from customer enquiry to completed paid work. Verified results will be published as the pilot progresses.
+            OREAGLE is currently validating its first customer acquisition partnership. We&apos;re tracking the journey from customer enquiry to completed paid work. Verified results will be published as the pilot progresses.
           </p>
         </Reveal>
 
@@ -54,7 +54,7 @@ export function ProofSection() {
               Pilot currently in progress
             </h3>
             <p className="mt-2 text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
-              We&apos;re collecting and verifying real customer-acquisition data. Once the results are verified, this section will show the actual numbers.
+              We&apos;re collecting and verifying real customer acquisition data. Once the results are verified, this section will show the actual numbers.
             </p>
 
             {/* 3. SIMPLE PROGRESS STORY FLOW */}
