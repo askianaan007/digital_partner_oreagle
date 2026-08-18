@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, ShieldCheck, CheckCircle2, Layers } from "lucide-react";
+import { ArrowRight, ShieldCheck, CheckCircle2, Layers, Calculator } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { CommissionCalculator } from "@/components/commission-calculator";
+import { PerformanceModal } from "@/components/performance-modal";
 
 const TRADITIONAL_FLOW = [
   "Upfront fee",
@@ -23,7 +23,7 @@ const OREAGLE_FLOW = [
 ];
 
 export function PerformanceModel() {
-  const [showCalculator, setShowCalculator] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section id="performance-model" className="relative py-28 sm:py-36">
@@ -98,7 +98,7 @@ export function PerformanceModel() {
           </Reveal>
         </div>
 
-        {/* Supporting Line & Toggle Button */}
+        {/* Supporting Line & Interactive Calculator Modal Trigger Button */}
         <Reveal delay={0.2} className="mt-10">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 rounded-3xl border border-white/10 bg-surface/70 p-7 backdrop-blur-md">
             <div className="flex items-center gap-3">
@@ -110,33 +110,21 @@ export function PerformanceModel() {
 
             <button
               type="button"
-              onClick={() => setShowCalculator((prev) => !prev)}
-              className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-accent/50 bg-accent/15 px-6 py-3.5 text-xs font-bold text-accent transition-all hover:bg-accent hover:text-zinc-950 shadow-lg shadow-accent/10"
+              onClick={() => setIsModalOpen(true)}
+              className="group inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full bg-accent px-7 py-4 text-xs sm:text-sm font-bold text-zinc-950 shadow-xl shadow-accent/20 transition-all hover:bg-white hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <span>{showCalculator ? "Hide Calculator" : "See How the Performance Model Works"}</span>
-              <ChevronDown
-                className={`size-4 transition-transform duration-300 ${
-                  showCalculator ? "rotate-180" : ""
-                }`}
-              />
+              <Calculator className="size-4" />
+              <span>See How the Performance Model Works</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
         </Reveal>
 
-        {/* Progressive Disclosure: Interactive Commission Calculator */}
-        <AnimatePresence>
-          {showCalculator && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 overflow-hidden"
-            >
-              <CommissionCalculator />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Interactive Performance Model Calculator Modal */}
+        <PerformanceModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </section>
   );

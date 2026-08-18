@@ -6,7 +6,7 @@ import {
   Menu,
   X,
   ArrowUpRight,
-  Home,
+  Home as HomeIcon,
   Zap,
   Layers,
   TrendingUp,
@@ -16,6 +16,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const LINKS = [
+  { label: "Home", href: "#top" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "What We Manage", href: "#what-we-manage" },
   { label: "Performance", href: "#performance-model" },
@@ -24,7 +25,7 @@ const LINKS = [
 ];
 
 const LEFT_ICONS = [
-  { label: "Home", href: "#top", icon: Home },
+  { label: "Home", href: "#top", icon: HomeIcon },
   { label: "How It Works", href: "#how-it-works", icon: Zap },
   { label: "What We Manage", href: "#what-we-manage", icon: Layers },
 ];
@@ -41,24 +42,46 @@ export function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const [activeSection, setActiveSection] = useState("#top");
 
+  const scrollToSection = (href: string) => {
+    setActiveSection(href);
+    setOpen(false);
+    setIsHovered(false);
+    if (href === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Track active section based on scroll position
-      const scrollPos = window.scrollY + 200;
+      if (window.scrollY < 250) {
+        setActiveSection("#top");
+        return;
+      }
+
+      const scrollPos = window.scrollY + 250;
+      let currentSection = "#top";
+
       for (const link of LINKS) {
+        if (link.href === "#top") continue;
         const id = link.href.replace("#", "");
         const el = document.getElementById(id);
         if (el) {
           const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(link.href);
-            break;
+          if (scrollPos >= top) {
+            currentSection = link.href;
           }
         }
       }
+
+      setActiveSection(currentSection);
     };
 
     onScroll();
@@ -114,29 +137,35 @@ export function Navbar() {
                 {LEFT_ICONS.map(({ label, href, icon: Icon }) => {
                   const isActive = activeSection === href;
                   return (
-                    <a
+                    <button
                       key={href}
-                      href={href}
+                      type="button"
                       title={label}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        scrollToSection(href);
+                      }}
                       className={cn(
-                        "p-1.5 sm:p-2 rounded-full transition-all duration-200",
+                        "p-1.5 sm:p-2 rounded-full transition-all duration-200 cursor-pointer",
                         isActive
-                          ? "bg-white/15 text-white border border-white/20 shadow-xs"
+                          ? "bg-white/20 text-accent border border-accent/40 shadow-xs"
                           : "text-white/70 hover:text-white hover:bg-white/10"
                       )}
                     >
                       <Icon className="size-4 stroke-[1.5]" />
-                    </a>
+                    </button>
                   );
                 })}
               </div>
 
               {/* Center: OREAGLE Logo Symbol */}
-              <a
-                href="#top"
-                className="flex items-center justify-center px-2.5"
-                onClick={(e) => e.stopPropagation()}
+              <button
+                type="button"
+                className="flex items-center justify-center px-2.5 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  scrollToSection("#top");
+                }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -144,27 +173,30 @@ export function Navbar() {
                   alt="OREAGLE Logo"
                   className="h-9 sm:h-11 w-auto brightness-0 invert opacity-100 transition-transform hover:scale-110"
                 />
-              </a>
+              </button>
 
               {/* Right Side: 3 Outlined Tab Icons */}
               <div className="flex items-center gap-1 sm:gap-1.5">
                 {RIGHT_ICONS.map(({ label, href, icon: Icon }) => {
                   const isActive = activeSection === href;
                   return (
-                    <a
+                    <button
                       key={href}
-                      href={href}
+                      type="button"
                       title={label}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        scrollToSection(href);
+                      }}
                       className={cn(
-                        "p-1.5 sm:p-2 rounded-full transition-all duration-200",
+                        "p-1.5 sm:p-2 rounded-full transition-all duration-200 cursor-pointer",
                         isActive
-                          ? "bg-white/15 text-white border border-white/20 shadow-xs"
+                          ? "bg-white/20 text-accent border border-accent/40 shadow-xs"
                           : "text-white/70 hover:text-white hover:bg-white/10"
                       )}
                     >
                       <Icon className="size-4 stroke-[1.5]" />
-                    </a>
+                    </button>
                   );
                 })}
               </div>
@@ -180,14 +212,18 @@ export function Navbar() {
               className="flex w-full items-center justify-between"
             >
               {/* Left: OREAGLE Landscape Logo */}
-              <a href="#top" className="flex items-center group shrink-0 py-0.5">
+              <button
+                type="button"
+                onClick={() => scrollToSection("#top")}
+                className="flex items-center group shrink-0 py-0.5 cursor-pointer"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo_lanscape.png"
                   alt="OREAGLE Logo"
                   className="h-8 sm:h-9 w-auto brightness-0 invert opacity-100 transition-transform group-hover:scale-105"
                 />
-              </a>
+              </button>
 
               {/* Center: Desktop Navigation Links */}
               <ul className="hidden items-center gap-1 xl:flex">
@@ -195,18 +231,18 @@ export function Navbar() {
                   const isActive = activeSection === link.href;
                   return (
                     <li key={link.href}>
-                      <a
-                        href={link.href}
-                        onClick={() => setActiveSection(link.href)}
+                      <button
+                        type="button"
+                        onClick={() => scrollToSection(link.href)}
                         className={cn(
-                          "text-xs sm:text-sm font-medium transition-all duration-200 px-3.5 py-1.5 rounded-full inline-block",
+                          "text-xs sm:text-sm font-medium transition-all duration-200 px-3.5 py-1.5 rounded-full inline-block cursor-pointer",
                           isActive
-                            ? "bg-white/12 text-white border border-white/15 shadow-xs"
+                            ? "bg-white/15 text-accent border border-accent/40 shadow-xs"
                             : "text-white/70 hover:text-white hover:bg-white/5"
                         )}
                       >
                         {link.label}
-                      </a>
+                      </button>
                     </li>
                   );
                 })}
@@ -214,9 +250,10 @@ export function Navbar() {
 
               {/* Right: Primary CTA Button */}
               <div className="hidden xl:flex items-center gap-3">
-                <a
-                  href="#contact"
-                  className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-[#f0d468] via-accent to-[#d4af37] px-5 py-2.5 text-xs sm:text-sm font-semibold text-zinc-950 shadow-md shadow-accent/25 transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:scale-[1.02] active:scale-[0.98]"
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("#contact")}
+                  className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-[#f0d468] via-accent to-[#d4af37] px-5 py-2.5 text-xs sm:text-sm font-semibold text-zinc-950 shadow-md shadow-accent/25 transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                 >
                   {/* Shimmer Light Beam Effect */}
                   <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-12 -translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-[300%]" />
@@ -226,7 +263,7 @@ export function Navbar() {
                   <span className="relative z-10 flex size-5 items-center justify-center rounded-full bg-black/10 transition-all duration-300 group-hover:bg-zinc-950 group-hover:text-accent group-hover:rotate-45">
                     <ArrowUpRight className="size-3.5 transition-transform" />
                   </span>
-                </a>
+                </button>
               </div>
 
               {/* Mobile Menu Toggle Button */}
@@ -264,21 +301,18 @@ export function Navbar() {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: i * 0.04 }}
                   >
-                    <a
-                      href={link.href}
-                      onClick={() => {
-                        setActiveSection(link.href);
-                        setOpen(false);
-                      }}
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection(link.href)}
                       className={cn(
-                        "block rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200",
+                        "w-full text-left block rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200 cursor-pointer",
                         isActive
-                          ? "bg-white/12 text-white border border-white/15"
+                          ? "bg-white/15 text-accent border border-accent/30"
                           : "text-white/70 hover:bg-white/5 hover:text-white"
                       )}
                     >
                       {link.label}
-                    </a>
+                    </button>
                   </motion.li>
                 );
               })}
@@ -288,16 +322,16 @@ export function Navbar() {
                 transition={{ delay: LINKS.length * 0.04 }}
                 className="mt-3 pt-2 border-t border-white/10"
               >
-                <a
-                  href="#contact"
-                  onClick={() => setOpen(false)}
-                  className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#f0d468] via-accent to-[#d4af37] px-5 py-3 text-sm font-semibold text-accent-ink transition-transform active:scale-[0.98]"
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("#contact")}
+                  className="w-full group relative flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#f0d468] via-accent to-[#d4af37] px-5 py-3 text-sm font-semibold text-accent-ink transition-transform active:scale-[0.98] cursor-pointer"
                 >
                   <span className="relative z-10">See If We&apos;re a Fit</span>
                   <span className="relative z-10 flex size-5 items-center justify-center rounded-full bg-black/10 text-black">
                     <ArrowUpRight className="size-3.5" />
                   </span>
-                </a>
+                </button>
               </motion.li>
             </ul>
           </motion.div>
