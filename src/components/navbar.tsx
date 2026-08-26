@@ -142,7 +142,7 @@ export function Navbar() {
                       type="button"
                       title={label}
                       onClick={(e) => {
-                        e.stopPropagation();
+                        e.stopPropagation(); 
                         scrollToSection(href);
                       }}
                       className={cn(
